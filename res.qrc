@@ -1,0 +1,17 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>icons/add.gif</file>
+        <file>icons/coor.gif</file>
+        <file>icons/edit.gif</file>
+        <file>icons/settings.gif</file>
+        <file>Combinear.qss</file>
+        <file>icons/nuclear_0.png</file>
+        <file>icons/nuclear_1.png</file>
+        <file>icons/nuclear_2.png</file>
+        <file>icons/nuclear_3.png</file>
+        <file>icons/nuclear_4.png</file>
+        <file>icons/nuclear_5.png</file>
+        <file>icons/nuclear_6.png</file>
+        <file>icons/nuclear_7.png</file>
+    </qresource>
+</RCC>
