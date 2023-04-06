@@ -19,6 +19,7 @@ SOURCES += \
     animatedlabel.cpp \
     blastmath.cpp \
     database.cpp \
+    infowindow.cpp \
     inputwindow.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -30,12 +31,14 @@ HEADERS += \
     blastmath.h \
     database.h \
     ellipse.h \
+    infowindow.h \
     inputwindow.h \
     mainwindow.h \
     maplayer.h \
     settingswindow.h
 
 FORMS += \
+    infowindow.ui \
     inputwindow.ui \
     mainwindow.ui \
     settingswindow.ui

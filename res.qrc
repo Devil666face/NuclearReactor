@@ -13,5 +13,6 @@
         <file>icons/nuclear_5.png</file>
         <file>icons/nuclear_6.png</file>
         <file>icons/nuclear_7.png</file>
+        <file>icons/info.gif</file>
     </qresource>
 </RCC>

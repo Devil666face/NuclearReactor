@@ -8,6 +8,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->frame_pane->hide();
     create_button_input(create_button(":/new/prefix1/icons/edit.gif","Нажмите для ввода исходных данных",64));
+    create_button_info(create_button(":/new/prefix1/icons/info.gif","Нажмите для отображения справочной информации",64));
     create_button_settings(create_button(":/new/prefix1/icons/settings.gif","Нажмите для изменения параметров отображения карты",64));
     load_map(ui->map_lay,"earth/plain/srtm.dgml",0);
 }
@@ -32,6 +33,12 @@ void MainWindow::on_pushButton_settings()
     settingswin = new SettingsWindow(this, map->mapThemeId(), map->projection());
     connect(settingswin,SIGNAL(send_map_settings(QString, int)),this,SLOT(set_map_settings(QString, int)));
     show_window(settingswin);
+}
+
+void MainWindow::on_pushButton_info()
+{
+    infowin = new InfoWindow(this);
+    show_window(infowin);
 }
 
 void MainWindow::set_map_settings(QString map_theme, int projection)
@@ -122,6 +129,11 @@ void MainWindow::create_button_input(AnimatedLabel* button)
 void MainWindow::create_button_settings(AnimatedLabel *button)
 {
     connect(button, SIGNAL(clicked()), SLOT(on_pushButton_settings()));
+}
+
+void MainWindow::create_button_info(AnimatedLabel *button)
+{
+    connect(button, SIGNAL(clicked()), SLOT(on_pushButton_info()));
 }
 
 AnimatedLabel* MainWindow::create_button(QString icon_path, QString legend, int size)
