@@ -24,9 +24,9 @@ AllowNoIcons=yes
 ; Remove the following line to run in administrative install mode (install for all users.)
 PrivilegesRequired=lowest
 PrivilegesRequiredOverridesAllowed=commandline
-OutputDir=C:\Users\X270\NuclearReactor
+OutputDir=E:\NuclearReactor
 OutputBaseFilename=Оценка радиационной обстановки
-SetupIconFile=C:\Users\X270\NuclearReactor\icon.ico
+SetupIconFile=E:\NuclearReactor\icon.ico
 Compression=lzma
 SolidCompression=yes
 WizardStyle=modern
@@ -38,8 +38,8 @@ Name: "russian"; MessagesFile: "compiler:Languages\Russian.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "C:\Users\X270\NuclearReactor\build\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
-Source: "C:\Users\X270\NuclearReactor\build\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "E:\NuclearReactor\build\{#MyAppExeName}"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\NuclearReactor\build\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
 
 [Registry]

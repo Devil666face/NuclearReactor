@@ -32,7 +32,7 @@ class Ui_InputWindow
 {
 public:
     QWidget *centralwidget;
-    QVBoxLayout *verticalLayout_4;
+    QVBoxLayout *verticalLayout_6;
     QFrame *frame_nuclear;
     QVBoxLayout *verticalLayout_3;
     QGroupBox *groupBox_nuclear;
@@ -68,6 +68,19 @@ public:
     QLabel *label_13;
     QLabel *label_11;
     QComboBox *comboBox_cloud;
+    QFrame *frame;
+    QVBoxLayout *verticalLayout_5;
+    QGroupBox *groupBox;
+    QVBoxLayout *verticalLayout_4;
+    QHBoxLayout *horizontalLayout_3;
+    QGridLayout *gridLayout_4;
+    QLabel *label_15;
+    QDoubleSpinBox *doubleSpinBox_lon_unit;
+    QLabel *label_16;
+    QLabel *label_17;
+    QDoubleSpinBox *doubleSpinBox_lat_unit;
+    QLabel *label_18;
+    QGridLayout *lay_coor_unit;
     QGridLayout *lay_enter;
     QMenuBar *menubar;
     QStatusBar *statusbar;
@@ -76,11 +89,11 @@ public:
     {
         if (InputWindow->objectName().isEmpty())
             InputWindow->setObjectName(QString::fromUtf8("InputWindow"));
-        InputWindow->resize(419, 455);
+        InputWindow->resize(462, 573);
         centralwidget = new QWidget(InputWindow);
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-        verticalLayout_4 = new QVBoxLayout(centralwidget);
-        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        verticalLayout_6 = new QVBoxLayout(centralwidget);
+        verticalLayout_6->setObjectName(QString::fromUtf8("verticalLayout_6"));
         frame_nuclear = new QFrame(centralwidget);
         frame_nuclear->setObjectName(QString::fromUtf8("frame_nuclear"));
         frame_nuclear->setFrameShape(QFrame::WinPanel);
@@ -214,7 +227,7 @@ public:
         verticalLayout_3->addWidget(groupBox_nuclear);
 
 
-        verticalLayout_4->addWidget(frame_nuclear);
+        verticalLayout_6->addWidget(frame_nuclear);
 
         frame_weather = new QFrame(centralwidget);
         frame_weather->setObjectName(QString::fromUtf8("frame_weather"));
@@ -276,17 +289,90 @@ public:
         verticalLayout->addWidget(groupBox_weater);
 
 
-        verticalLayout_4->addWidget(frame_weather);
+        verticalLayout_6->addWidget(frame_weather);
+
+        frame = new QFrame(centralwidget);
+        frame->setObjectName(QString::fromUtf8("frame"));
+        frame->setFrameShape(QFrame::WinPanel);
+        frame->setFrameShadow(QFrame::Raised);
+        verticalLayout_5 = new QVBoxLayout(frame);
+        verticalLayout_5->setObjectName(QString::fromUtf8("verticalLayout_5"));
+        groupBox = new QGroupBox(frame);
+        groupBox->setObjectName(QString::fromUtf8("groupBox"));
+        verticalLayout_4 = new QVBoxLayout(groupBox);
+        verticalLayout_4->setObjectName(QString::fromUtf8("verticalLayout_4"));
+        horizontalLayout_3 = new QHBoxLayout();
+        horizontalLayout_3->setObjectName(QString::fromUtf8("horizontalLayout_3"));
+        gridLayout_4 = new QGridLayout();
+        gridLayout_4->setObjectName(QString::fromUtf8("gridLayout_4"));
+        label_15 = new QLabel(groupBox);
+        label_15->setObjectName(QString::fromUtf8("label_15"));
+        label_15->setAlignment(Qt::AlignCenter);
+
+        gridLayout_4->addWidget(label_15, 0, 0, 1, 1);
+
+        doubleSpinBox_lon_unit = new QDoubleSpinBox(groupBox);
+        doubleSpinBox_lon_unit->setObjectName(QString::fromUtf8("doubleSpinBox_lon_unit"));
+        doubleSpinBox_lon_unit->setEnabled(false);
+        doubleSpinBox_lon_unit->setReadOnly(true);
+        doubleSpinBox_lon_unit->setMinimum(-360.000000000000000);
+        doubleSpinBox_lon_unit->setMaximum(360.000000000000000);
+        doubleSpinBox_lon_unit->setValue(0.000000000000000);
+
+        gridLayout_4->addWidget(doubleSpinBox_lon_unit, 0, 1, 1, 1);
+
+        label_16 = new QLabel(groupBox);
+        label_16->setObjectName(QString::fromUtf8("label_16"));
+
+        gridLayout_4->addWidget(label_16, 0, 2, 1, 1);
+
+        label_17 = new QLabel(groupBox);
+        label_17->setObjectName(QString::fromUtf8("label_17"));
+        label_17->setAlignment(Qt::AlignCenter);
+
+        gridLayout_4->addWidget(label_17, 1, 0, 1, 1);
+
+        doubleSpinBox_lat_unit = new QDoubleSpinBox(groupBox);
+        doubleSpinBox_lat_unit->setObjectName(QString::fromUtf8("doubleSpinBox_lat_unit"));
+        doubleSpinBox_lat_unit->setEnabled(false);
+        doubleSpinBox_lat_unit->setReadOnly(false);
+        doubleSpinBox_lat_unit->setMinimum(-360.000000000000000);
+        doubleSpinBox_lat_unit->setMaximum(360.000000000000000);
+        doubleSpinBox_lat_unit->setValue(0.000000000000000);
+
+        gridLayout_4->addWidget(doubleSpinBox_lat_unit, 1, 1, 1, 1);
+
+        label_18 = new QLabel(groupBox);
+        label_18->setObjectName(QString::fromUtf8("label_18"));
+
+        gridLayout_4->addWidget(label_18, 1, 2, 1, 1);
+
+
+        horizontalLayout_3->addLayout(gridLayout_4);
+
+        lay_coor_unit = new QGridLayout();
+        lay_coor_unit->setObjectName(QString::fromUtf8("lay_coor_unit"));
+
+        horizontalLayout_3->addLayout(lay_coor_unit);
+
+
+        verticalLayout_4->addLayout(horizontalLayout_3);
+
+
+        verticalLayout_5->addWidget(groupBox);
+
+
+        verticalLayout_6->addWidget(frame);
 
         lay_enter = new QGridLayout();
         lay_enter->setObjectName(QString::fromUtf8("lay_enter"));
 
-        verticalLayout_4->addLayout(lay_enter);
+        verticalLayout_6->addLayout(lay_enter);
 
         InputWindow->setCentralWidget(centralwidget);
         menubar = new QMenuBar(InputWindow);
         menubar->setObjectName(QString::fromUtf8("menubar"));
-        menubar->setGeometry(QRect(0, 0, 419, 26));
+        menubar->setGeometry(QRect(0, 0, 462, 26));
         InputWindow->setMenuBar(menubar);
         statusbar = new QStatusBar(InputWindow);
         statusbar->setObjectName(QString::fromUtf8("statusbar"));
@@ -324,6 +410,11 @@ public:
         comboBox_cloud->setItemText(1, QCoreApplication::translate("InputWindow", "\320\241\321\200\320\265\320\264\320\275\320\270\320\271", nullptr));
         comboBox_cloud->setItemText(2, QCoreApplication::translate("InputWindow", "\320\241\320\277\320\273\320\276\321\210\320\275\320\276\320\271", nullptr));
 
+        groupBox->setTitle(QCoreApplication::translate("InputWindow", "\320\232\320\276\320\276\321\200\320\264\320\270\320\275\320\260\321\202\321\213 \320\277\320\276\320\264\321\200\320\260\320\267\320\264\320\265\320\273\320\265\320\275\320\270\321\217", nullptr));
+        label_15->setText(QCoreApplication::translate("InputWindow", "\320\224\320\276\320\273\320\263\320\276\321\202\320\260", nullptr));
+        label_16->setText(QCoreApplication::translate("InputWindow", "\302\260", nullptr));
+        label_17->setText(QCoreApplication::translate("InputWindow", "\320\250\320\270\321\200\320\276\321\202\320\260", nullptr));
+        label_18->setText(QCoreApplication::translate("InputWindow", "\302\260", nullptr));
     } // retranslateUi
 
 };

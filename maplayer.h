@@ -38,6 +38,7 @@ public:
     int zoom_min;
     QVector<qreal> zoom_vector;
     bool draw_zone = false;
+    bool draw_unit = false;
     BlastMath blast;
 
 private:

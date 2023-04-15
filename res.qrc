@@ -14,5 +14,13 @@
         <file>icons/nuclear_6.png</file>
         <file>icons/nuclear_7.png</file>
         <file>icons/info.gif</file>
+        <file>icons/zrdn_0.png</file>
+        <file>icons/zrdn_1.png</file>
+        <file>icons/zrdn_2.png</file>
+        <file>icons/zrdn_3.png</file>
+        <file>icons/zrdn_4.png</file>
+        <file>icons/zrdn_5.png</file>
+        <file>icons/zrdn_6.png</file>
+        <file>icons/zrdn_7.png</file>
     </qresource>
 </RCC>

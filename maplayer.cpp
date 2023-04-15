@@ -29,14 +29,18 @@ MapLayer::~MapLayer()
 
 void MapLayer::draw_zone_list(GeoPainter* painter, QList<Ellipse> ellipse_list)
 {
-    if (!draw_zone) return;
-    painter->setPen(QPen(Qt::black, 2));
-    draw_legend(painter, GeoDataCoordinates(blast.lon, blast.lat), blast.legend, -150);
-    for (int i=0;i<ellipse_list.size();i++) {
-        set_color_for_zone(painter, i);
-        draw_ellipse(painter, blast, ellipse_list[i]);
+    if (draw_zone) {
+        painter->setPen(QPen(Qt::black, 2));
+        draw_legend(painter, GeoDataCoordinates(blast.lon, blast.lat), blast.legend, -150);
+        for (int i=0;i<ellipse_list.size();i++) {
+            set_color_for_zone(painter, i);
+            draw_ellipse(painter, blast, ellipse_list[i]);
+        }
+        painter->drawImage(GeoDataCoordinates(blast.lon, blast.lat), get_image(get_zoom_interval(zoom, zoom_vector),"nuclear"));
     }
-    painter->drawImage(GeoDataCoordinates(blast.lon, blast.lat), get_image(get_zoom_interval(zoom, zoom_vector),"nuclear"));
+    if (draw_unit) {
+        painter->drawImage(GeoDataCoordinates(blast.lon_unit, blast.lat_unit), get_image(get_zoom_interval(zoom, zoom_vector),"zrdn"));
+    }
 }
 
 void MapLayer::set_painter_color(GeoPainter *painter, QColor main_color)

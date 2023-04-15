@@ -21,7 +21,15 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
 void MainWindow::on_pushButton_input()
 {
-    inputwin = new InputWindow(this);
+
+    if (blast.check_coor_unit(), blast.check_coor_blast()) {
+        delete inputwin;
+        inputwin = new InputWindow(this, blast);
+    }
+    else
+    {
+        inputwin = new InputWindow(this);
+    }
     show_window(inputwin);
     connect(inputwin, SIGNAL(send_blast_data(BlastMath)), this, SLOT(recive_blast_data_from_input_window(BlastMath)));
     connect(inputwin, SIGNAL(coor_button_push()), this, SLOT(on_click_coor_button_in_input_window()));
@@ -50,6 +58,9 @@ void MainWindow::set_map_settings(QString map_theme, int projection)
 void MainWindow::recive_blast_data_from_input_window(BlastMath _blast)
 {
     blast = _blast;
+    if (blast.check_coor_unit()) layer->draw_unit=true;
+    if (blast.check_coor_blast()) layer->draw_zone=true;
+    layer->blast=blast;
     if (blast.check_v_wind_total_bad()) {
         QMessageBox::critical(this, "Ошибка", QString("Для параметров:\n"
                                                       "скорость ветра - %1 м/с\n"
@@ -62,9 +73,11 @@ void MainWindow::recive_blast_data_from_input_window(BlastMath _blast)
         QMessageBox::critical(this, "Ошибка", QString("Для выбранных параметров не существует табличных значений."));
         return;
     }
-    //MATH
-    layer->blast=blast;
-    if (blast.check_coor_blast()) layer->draw_zone=true;
+    if ((blast.check_coor_unit()) && (blast.check_coor_blast())) {
+        blast.danger_zone_index = blast.get_danger_zone_index();
+        show_message_window_result(blast.danger_zone_index);
+    }
+
 }
 
 void MainWindow::on_click_coor_button_in_input_window()
@@ -141,6 +154,32 @@ AnimatedLabel* MainWindow::create_button(QString icon_path, QString legend, int 
     AnimatedLabel* button = new AnimatedLabel(this, icon_path, legend, size, size);
     ui->mainToolBar->addWidget(button);
     return button;
+}
+
+void MainWindow::show_message_window_result(int _zone_index)
+{
+    QString message;
+    switch (_zone_index) {
+    case -1:
+        message="Подразделение находится в безопасной зоне. Быть готовым к команде РАДИАЦИОННАЯ ОПАСНОСТЬ и ХИМИЧЕСКАЯ ТРЕВОГА. При получении команды незамедлительно надеть средства индивидуальной защиты.";
+        break;
+    case 0:
+        message="Немедленно надеть средства индивидуальной защиты. Закрыть люки, двери, жалюзи. Включить систему ЗОМП. По команде старшего передислоцировать мобильный КСА в безопасную зону.";
+        break;
+    case 1:
+        message="Немедленно надеть средства индивидуальной защиты. Закрыть люки, двери, жалюзи. Включить систему ЗОМП. По команде старшего передислоцировать мобильный КСА в безопасную зону.";
+        break;
+    case 2:
+        message="Немедленно надеть средства индивидуальной защиты. Закрыть люки, двери, жалюзи. Включить систему ЗОМП. По команде старшего передислоцировать мобильный КСА в безопасную зону.";
+        break;
+    case 3:
+        message="Подразделение не боеспособно. Летальный исход 100%.";
+        break;
+    default:
+        message="Подразделение не боеспособно. Летальный исход 100%.";
+        break;
+    }
+    QMessageBox::information(this,"Рекомендации",message);
 }
 
 void MainWindow::mouse_move_on_map(QString string)

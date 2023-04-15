@@ -42,7 +42,8 @@ private:
     void create_button_info(AnimatedLabel* button);
     AnimatedLabel* create_button(QString icon_path, QString legend, int size);
 
-
+// Result
+    void show_message_window_result(int _zone_index);
 
 private slots:
     void mouse_move_on_map(QString string);

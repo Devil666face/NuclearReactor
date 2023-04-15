@@ -61,6 +61,33 @@ void BlastMath::set(int _type_index, int _type_cloud_index, QDateTime _date_time
     legend = set_legend(type, date_time);
 }
 
+int BlastMath::get_danger_zone_index()
+{
+    int _danger_zone_index=-1;
+    foreach (Ellipse ellipse, ellipse_list) {
+        QVector<QPair<qreal,qreal>> coord_list = get_ellipse_coords(rad_to_deg(lon), rad_to_deg(lat), km_to_deg(ellipse.width), km_to_deg(ellipse.length, lat), qreal(deg_to_rad(alfa_wind)), int(ellipse.length*2));
+        bool is_ellipse = is_point_in_ellipse(coord_list, rad_to_deg(lon_unit), rad_to_deg(lat_unit));
+        if (is_ellipse) _danger_zone_index++;
+    }
+    return _danger_zone_index;
+}
+
+bool BlastMath::is_point_in_ellipse(QVector<QPair<qreal, qreal> > coord_list, qreal x, qreal y)
+{
+    bool is_inside = false;
+    for (int i = 0, j = coord_list.size() - 1; i < coord_list.size(); j = i++) {
+        qreal xi = coord_list[i].first;
+        qreal yi = coord_list[i].second;
+        qreal xj = coord_list[j].first;
+        qreal yj = coord_list[j].second;
+        if (((yi > y) != (yj > y)) &&
+            (x < (xj - xi) * (y - yi) / (yj - yi) + xi)) {
+            is_inside = !is_inside;
+        }
+    }
+    return is_inside;
+}
+
 qreal BlastMath::set_eta_max(int _N_reactors, int Eta_percents)
 {
     qreal Eta_max = _N_reactors*Eta_percents;
@@ -109,6 +136,11 @@ bool BlastMath::check_coor(qreal lon, qreal lat)
 {
     if ((lon!=-1) && (lat!=-1)) return true;
     return false;
+}
+
+bool BlastMath::check_coor_unit()
+{
+    return check_coor(lon_unit, lat_unit);
 }
 
 bool BlastMath::check_coor_blast()

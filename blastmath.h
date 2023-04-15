@@ -39,6 +39,8 @@ public:
     TypeCloud type_cloud = No;
     qreal lon=-1;
     qreal lat=-1;
+    qreal lon_unit=-1;
+    qreal lat_unit=-1;
     int N_reactors = 1;
     int Eta_percents = 10;
     qreal V_wind = 10;
@@ -49,6 +51,7 @@ public:
     int Eta_max = 10;
     bool day_time = true;
     int V_wind_total = 0;
+    int danger_zone_index = -1;
     Stability stability = Konvektion;
     QList<Ellipse> ellipse_list;
     QStringList legend;
@@ -59,12 +62,14 @@ public:
 
     //Setter
     void set(int _type_index, int _type_cloud_index, QDateTime _date_time, int _N, int Eta, qreal _V_wind, qreal _alfa);
+    int get_danger_zone_index();
 
     QString get_string_stability();
     QString get_string_day();
 
     //Validation
     bool check_coor_blast();
+    bool check_coor_unit();
     bool check_empty_ellipse_list();
     bool check_v_wind_total_bad();
 
@@ -101,6 +106,7 @@ private:
 
     //Ellipse math
     QPair<qreal, qreal> get_coords_for_offset(qreal x, qreal y, qreal distance, qreal angle);
+    bool is_point_in_ellipse(QVector<QPair<qreal, qreal> > coord_list, qreal x, qreal y);
     public: QVector<QPair<qreal,qreal>> get_ellipse_coords(qreal centerX, qreal centerY, qreal a, qreal b, qreal rotationAngle, int numPoints);
 };
 

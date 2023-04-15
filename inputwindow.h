@@ -22,6 +22,7 @@ class InputWindow : public QMainWindow
 
 public:
     explicit InputWindow(QWidget *parent = nullptr);
+    explicit InputWindow(QWidget *parent, BlastMath _blast);
     ~InputWindow();
     BlastMath blast;
 
@@ -34,6 +35,7 @@ private:
     AnimatedLabel *create_button(QString icon_path, QString legend, int size, QGridLayout *&lay);
     void create_button_enter(AnimatedLabel* button);
     void create_button_coor(AnimatedLabel* button);
+    void create_button_coor_unit(AnimatedLabel* button);
     bool check_coor(qreal lon, qreal lat, QString header, QString message);
     void set_coor_in_ui(qreal lon, qreal lat, QDoubleSpinBox*& lon_spin, QDoubleSpinBox*& lat_spin);
 
@@ -41,6 +43,7 @@ private slots:
     void on_comboBox_type_currentIndexChanged(int index);
     void on_pushButton_enter();
     void on_pushButton_coor();
+    void on_pushButton_coor_unit();
     void on_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime);
     void recive_coor_from_mainwidnow(qreal lon, qreal lat);
 
@@ -49,6 +52,7 @@ private slots:
 signals:
     void send_blast_data(BlastMath blast);
     void coor_button_push();
+
 };
 
 #endif // INPUTWINDOW_H

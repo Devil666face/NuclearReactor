@@ -9,6 +9,20 @@ InputWindow::InputWindow(QWidget *parent) :
     blast = BlastMath();
 //    create_button_enter(create_button(":/new/prefix1/icons/add.gif","Нажмите для добавления текущих параметров",64,ui->lay_enter));
     create_button_coor(create_button(":/new/prefix1/icons/coor.gif","Нажмите для выбора на карте координат взрыва",64,ui->lay_coor));
+    create_button_coor_unit(create_button(":/new/prefix1/icons/coor.gif","Нажмите для выбора на карте координат подразделения",64,ui->lay_coor_unit));
+    set_dateTime(ui->dateTimeEdit);
+}
+
+InputWindow::InputWindow(QWidget *parent, BlastMath _blast) :
+    QMainWindow(parent),
+    ui(new Ui::InputWindow)
+{
+    ui->setupUi(this);
+    blast = _blast;
+    set_coor_in_ui(blast.lat_unit,blast.lat_unit,ui->doubleSpinBox_lon_unit,ui->doubleSpinBox_lat_unit);
+    set_coor_in_ui(blast.lat,blast.lat,ui->doubleSpinBox_lon,ui->doubleSpinBox_lat);
+    create_button_coor(create_button(":/new/prefix1/icons/coor.gif","Нажмите для выбора на карте координат взрыва",64,ui->lay_coor));
+    create_button_coor_unit(create_button(":/new/prefix1/icons/coor.gif","Нажмите для выбора на карте координат подразделения",64,ui->lay_coor_unit));
     set_dateTime(ui->dateTimeEdit);
 }
 
@@ -38,6 +52,11 @@ void InputWindow::create_button_enter(AnimatedLabel *button)
 void InputWindow::create_button_coor(AnimatedLabel *button)
 {
     connect(button, SIGNAL(clicked()), SLOT(on_pushButton_coor()));
+}
+
+void InputWindow::create_button_coor_unit(AnimatedLabel *button)
+{
+    connect(button, SIGNAL(clicked()), SLOT(on_pushButton_coor_unit()));
 }
 
 bool InputWindow::check_coor(qreal lon, qreal lat, QString header, QString message)
@@ -80,6 +99,13 @@ void InputWindow::on_pushButton_coor()
     this->hide();
 }
 
+void InputWindow::on_pushButton_coor_unit()
+{
+    send_button = "unit";
+    emit coor_button_push();
+    this->hide();
+}
+
 void InputWindow::on_dateTimeEdit_dateTimeChanged(const QDateTime &dateTime)
 {
     blast.date_time=dateTime;
@@ -98,6 +124,12 @@ void InputWindow::recive_coor_from_mainwidnow(qreal lon, qreal lat)
                   ui->spinBox_eta->value(),
                   ui->spinBox_V_wind->value(),
                   ui->spinBox_alfa_wind->value());
+        emit send_blast_data(blast);
+    }
+    if (send_button=="unit") {
+        blast.lon_unit=lon;
+        blast.lat_unit=lat;
+        set_coor_in_ui(lon,lat,ui->doubleSpinBox_lon_unit,ui->doubleSpinBox_lat_unit);
         emit send_blast_data(blast);
     }
 }
